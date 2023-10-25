@@ -1,63 +1,28 @@
 import * as React from 'react';
+import {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import {alpha, createTheme, getContrastRatio, ThemeProvider} from '@mui/material/styles';
-import GoogleButton from "react-google-button";
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useNavigate} from "react-router-dom";
 import {GoogleSignInAPI, LoginAPI} from "../api/AuthAPI.jsx";
 import {toast} from "react-toastify";
-import {useState} from "react";
 import LoginComponent from "./LoginComponent.jsx";
+import RegisterComponent from "./RegisterComponent.jsx";
 
-const violetBase = '#7F00FF';
-const violetMain = alpha(violetBase, 0.7);
 
-const defaultTheme = createTheme({
-    palette: {
-        violet: {
-            main: violetMain,
-            light: alpha(violetBase, 0.5),
-            dark: alpha(violetBase, 0.9),
-            contrastText: getContrastRatio(violetMain, '#fff') > 4.5 ? '#fff' : '#111',
-        },
-    },
-});
+const defaultTheme = createTheme();
 
 export default function SignInSide() {
-    const [creds, setCreds] = useState();
+    const [authState, setAuthState] = useState('login');
 
-    let navigate = useNavigate()
-    const login = async (e) => {
-        e.preventDefault()
-        try {
-            let res = await LoginAPI(creds.email, creds.password);
-            console.log(res)
-            toast.success('Logged in successfully', {})
-            navigate('/home')
-        } catch (err) {
-            console.log(err);
-            toast.error('Please check your credentials')
-        }
+    const handleChangeAuthState = (value) => {
+        setAuthState(value);
     }
-
-    const googleSignIn = () => {
-        GoogleSignInAPI();
-
-    }
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -83,7 +48,6 @@ export default function SignInSide() {
                     <Box
                         sx={{
                             my: 8,
-                            mx: 4,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -93,9 +57,13 @@ export default function SignInSide() {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography color={'white'} component="h1" variant="h5">
-                            Sign in
+                            {authState === 'login' ? "Sign in" : "Register"}
                         </Typography>
-                        <LoginComponent />
+                        {authState === 'login' ? <LoginComponent
+                            handleChangeAuthState={handleChangeAuthState}
+                        /> : <RegisterComponent
+                            handleChangeAuthState={handleChangeAuthState}
+                        />}
                         {/*<Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>*/}
                         {/*    <TextField*/}
                         {/*        margin="normal"*/}

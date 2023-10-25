@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-function LoginComponent() {
+function LoginComponent({handleChangeAuthState}) {
   let navigate = useNavigate()
   const login = async (e) => {
     e.preventDefault()
@@ -32,13 +32,13 @@ function LoginComponent() {
       <form action="post">
       <div className='form-control'>
       <input onChange={(e) => setCreds({...creds, email: e.target.value})} className='common-input' placeholder='Enter your email' type="email"/>
-      <input onChange={(e) => setCreds({...creds, password: e.target.value})} className='common-input' placeholder='Enter your passeord' type="password"/>
+      <input onChange={(e) => setCreds({...creds, password: e.target.value})} className='common-input' placeholder='Enter your password' type="password"/>
       </div>
       <button className='formButton' type='submit' onClick={login}>Login</button>
       </form>
       <div className="text-divider">or</div>
       <GoogleButton onClick={googleSignIn} type='dark' className='googleButton' />
-      <p className='link_text'>New User ? <span><Link to="/register">Register Now</Link></span></p>
+      <p className='link_text'>New User ? <span onClick={() => handleChangeAuthState('register')} style={{color: '#57e0ff', cursor: 'pointer'}}>Register Now</span></p>
     </>
   )
 }

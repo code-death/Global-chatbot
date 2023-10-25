@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
 import Loader from './common/Loader';
 
-function RegisterComponent() {
+function RegisterComponent({handleChangeAuthState}) {
   const [isLoading, setIsLoading] = useState(false)
 
   let navigate = useNavigate();
@@ -26,8 +26,7 @@ function RegisterComponent() {
   const [creds, setCreds] = useState();
 
   return (
-    isLoading ? <Loader /> : (<div className='container'>
-    <h2 className='heading'>Register on Codepen</h2>
+    isLoading ? <Loader /> : (<>
     <form action="post">
     <div className='form-control'>
     <input onChange={(e) => setCreds({...creds, email: e.target.value})} className='common-input' placeholder='Enter your email' type="email"/>
@@ -35,8 +34,8 @@ function RegisterComponent() {
     </div>
     <button className='formButton' type='submit' onClick={register}>Register</button>
     </form>
-    <p className='link_text'>Already a User ? <span><Link to="/">Login Now</Link></span></p>
-  </div>)
+    <p className='link_text'>Already a User ? <span onClick={() => handleChangeAuthState('login')} style={{color: '#57e0ff',cursor: 'pointer'}}>Login Now</span></p>
+  </>)
   )
 }
 
