@@ -24,12 +24,11 @@ function LoginComponent() {
 
   const googleSignIn = () => {
       GoogleSignInAPI();
-    
+
   }
 
   return (
-    <div className='container'>
-      <h2 className='heading'>Login to Codepen</h2>
+    <>
       <form action="post">
       <div className='form-control'>
       <input onChange={(e) => setCreds({...creds, email: e.target.value})} className='common-input' placeholder='Enter your email' type="email"/>
@@ -40,8 +39,7 @@ function LoginComponent() {
       <div className="text-divider">or</div>
       <GoogleButton onClick={googleSignIn} type='dark' className='googleButton' />
       <p className='link_text'>New User ? <span><Link to="/register">Register Now</Link></span></p>
-
-    </div>
+    </>
   )
 }
 
