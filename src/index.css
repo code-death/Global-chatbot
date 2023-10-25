@@ -1,4 +1,12 @@
+
+* {
+  margin: 0;
+}
+
+
 :root {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -12,58 +20,214 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --back_primary: #010E12;
+  --back_secondary: #033349;
+  --font_primary: #228592;
+  --font_secondary: #07D4C7;
+
+}
+
+.heading {
+  color: #07D4C780;
+}
+
+.container {
+  position: relative;
+  margin: 25vh auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40vw;
+  height: auto;
+  padding: 3rem 1rem;
+  border-radius: 10px;
+  background-color: #1d1e22;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.contaier::before {
+  content:  '';
+  position: absolute;
+  inset: -10px 140px;
+  background: linear-gradient(315deg, #00ccff, #d400d4);
+  transition: 0.5s;
+  animation: animate 4s linear infinite;
+}
+
+input {
+  width: 95%;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-left: .8rem;
+  padding-right: 0;
+  margin: 10px 0px;
+  background-color: #1d1e22;
+  border: none;
+  border-radius: 3px;
+  font: 800;
+  color: #ffffff;
+}
+
+input:focus {
+  border: 1px solid #07D4C750;
+  outline: none;
+}
+input::-webkit-input-placeholder {
+  color: #555555;
+  padding-left: 2px;
+}
+
+.formButton {
+  margin-top: 20px;
+  width: 95%;
+  padding: .4rem 0 .4rem .8rem;
+  background-color: #07D4C780;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.formButton:hover {
+  box-shadow: 0 4px 30px #22859250;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  text-decoration: none;
+  margin: 16px auto;
+  color: #00ccff;
 }
 
-body {
-  margin: 0;
+@media screen and (device-width > 768px) {
+  .container {
+    width: 300px;
+    height: auto;
+  }
+  
+}
+
+.text-divider {
+  margin-top: 16px;
+  --text-divider-gap: 1rem;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  align-items: center;
+  font-size: 0.9375rem;
+  letter-spacing: 0.1em;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.text-divider::before, .text-divider::after {
+  content: '';
+  height: 1px;
+  width: 100px;
+  border: none;
+  background-color: rgba(124, 124, 124, 0.3);
+  flex-grow: 1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.text-divider::before {
+  margin-right: var(--text-divider-gap);
+}
+
+.text-divider::after {
+  margin-left: var(--text-divider-gap);
+}
+
+.googleButton {
+  position:relative;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.loader {
+  position: absolute;
+  margin: 30px auto;
+}
+
+.editor {
+  display: flex;
+  flex-grow: 1;
+}
+
+.editorBox {
+  border: 5px solid #060606;
+  word-wrap: wrap;
+}
+
+.editorBar {
+  background-color: #060606;
+  display: flex;
+  justify-content: space-between;
+}
+
+.utilityIcons {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  margin: 0 3px;
+}
+
+.htmlIcon {
+  padding: 0 10px 1px;
+  background-color: #282c34;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.rightIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #282c34;
+  margin: 0px 3px;
+  border-radius: 5px;
+  width: 30px;
+  height: 22px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.rightIcon:hover {
+  background-color: #424242;
+}
+
+.output {
+  height: 48vh;
+  border: none;
+}
+
+.outputFrame {
+  border: none
+}
+
+.toolBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout {
+  margin: 0;
+  position: relative;
+  display: flex;
+  width: inherit;
+  padding: 3px 9px;
+  align-items: center;
+}
+
+.logoutIcon {
+  padding: 3px 8px 0px 0px;
+}
+
+.link_text {
+  margin-top: 20px;
 }
